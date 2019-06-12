@@ -9,7 +9,7 @@ def projectScmNamespace = "${SCM_NAMESPACE}"
 
 // Variables
 def projectNameKey = projectFolderName.toLowerCase().replace("/", "-")
-def referenceAppgitRepo = "jhpster-experiment.
+def referenceAppgitRepo = "jhpster-experiment"
 def regressionTestGitRepo =  "adop-cartridge-java-regression-tests"
 
 // Jobs
