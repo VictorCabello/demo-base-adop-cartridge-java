@@ -45,8 +45,10 @@ node {
         sh "./mvnw verify -Pprod -DskipTests"
         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
     }
+   
+    
     stage('quality analysis') {
-        withSonarQubeEnv('http://sonar') {
+        withSonarQubeEnv('ADOP Sonar') {
             sh "./mvnw sonar:sonar"
         }
     }
