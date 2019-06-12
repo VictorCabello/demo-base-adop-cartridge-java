@@ -13,7 +13,7 @@ def referenceAppgitRepo = "jhpster-experiment"
 def regressionTestGitRepo =  "adop-cartridge-java-regression-tests"
 
 // Jobs
-def buildAppJob = pipelineJob(projectFolderName + "/Reference_Application_Build"){
+def buildAppJob = pipelineJob(projectFolderName + "/JHipsterTest"){
     definition {
         cps {
             script(readFileFromWorkspace('cartridge/Jenkinsfile'))
