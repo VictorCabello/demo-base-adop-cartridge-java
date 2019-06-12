@@ -51,5 +51,8 @@ node {
         withSonarQubeEnv('ADOP Sonar') {
             sh "./mvnw sonar:sonar"
         }
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'target/jacoco', reportFiles: 'index.html', reportName: 'Jacoco Report', reportTitles: ''])
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'target/test-results/lcov-report', reportFiles: 'index.html', reportName: 'lcov Report', reportTitles: ''])
+
     }
 }
