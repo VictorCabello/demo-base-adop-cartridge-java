@@ -14,6 +14,38 @@ def regressionTestGitRepo =  "adop-cartridge-java-regression-tests"
 
 // Jobs
 def buildAppJob = pipelineJob(projectFolderName + "/JHipsterTest"){
+        description("This job builds Java Spring reference application")
+    wrappers {
+        preBuildCleanup()
+        injectPasswords()
+        maskPasswords()
+        sshAgent("adop-jenkins-master")
+    }
+    scm {
+        git {
+            remote {
+                url(referenceAppGitUrl)
+                credentials("adop-jenkins-master")
+            }
+            branch("*/master")
+        }
+    }
+    environmentVariables {
+        env('WORKSPACE_NAME', workspaceFolderName)
+        env('PROJECT_NAME', projectFolderName)
+    }
+    label("java8")
+    triggers {
+        gerrit {
+            events {
+                refUpdated()
+            }
+            project(projectFolderName + '/' + referenceAppgitRepo, 'plain:master')
+            configure { node ->
+                node / serverName("ADOP Gerrit")
+            }
+        }
+    }
     definition {
         cps {
             script(readFileFromWorkspace('cartridge/Jenkinsfile'))
