@@ -16,7 +16,7 @@ def regressionTestGitRepo =  "adop-cartridge-java-regression-tests"
 def buildAppJob = pipelineJob(projectFolderName + "/Reference_Application_Build"){
     definition {
         cps {
-            script(readFileFromWorkspace('Jenkinsfile'))
+            script(readFileFromWorkspace('cartridge/Jenkinsfile'))
             sandbox()
         }
     }
