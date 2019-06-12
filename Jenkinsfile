@@ -1,11 +1,10 @@
 #!/usr/bin/env groovy
 
 node {
-    stage('checkout') {
-        checkout scm
-    }
 
     stage('check java') {
+        git credentialsId: 'adop-ldap-admin', url: 'ssh://jenkins@gerrit:29418/ExampleWorkspace/ExampleProject/jhpster-experiment'
+
         sh "java -version"
     }
 
@@ -47,7 +46,7 @@ node {
         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
     }
     stage('quality analysis') {
-        withSonarQubeEnv('http://34.216.254.9/sonar') {
+        withSonarQubeEnv('http://sonar') {
             sh "./mvnw sonar:sonar"
         }
     }
